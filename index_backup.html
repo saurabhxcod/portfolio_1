@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Singh | Cyber Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#050508',
+                        bg2: '#0a0a12',
+                        card: '#0d0d1a',
+                        cyan: '#00f5ff',
+                        'cyan-dim': '#00c8d4',
+                        amber: '#ff6b00',
+                        gray: '#8892a4',
+                        border: 'rgba(0,245,255,0.12)'
+                    },
+                    fontFamily: {
+                        bebas: ['"Bebas Neue"', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+    </style>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Babel for in-browser transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #050508;
+            --bg2: #0a0a12;
+            --card: #0d0d1a;
+            --cyan: #00f5ff;
+            --cyan-dim: #00c8d4;
+            --amber: #ff6b00;
+            --white: #f0f4ff;
+            --gray: #8892a4;
+            --border: rgba(0,245,255,0.12);
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            margin: 0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        a, button, [role="button"], input, textarea {
+            cursor: none;
+        }
+
+        /* SVG noise grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* Scanline CSS overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 1px,
+                #000 1px,
+                #000 2px
+            );
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+        }
+        .glitch::before {
+            left: 4px;
+            text-shadow: -2px 0 var(--amber);
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -4px;
+            text-shadow: -2px 0 var(--cyan);
+            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+            animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
+        }
+        .glitch.stabilized::before, .glitch.stabilized::after {
+            display: none;
+        }
+        
+        @keyframes glitch-anim-1 {
+            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); }
+            20% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); }
+            40% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); }
+            50% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); }
+            60% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); }
+            70% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); }
+            80% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); }
+            100% { clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); }
+            15% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); }
+            22% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); }
+            31% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); }
+            45% { clip-path: polygon(0 40%, 100% 40%, 100% 40%, 0 40%); }
+            51% { clip-path: polygon(0 52%, 100% 52%, 100% 59%, 0 59%); }
+            63% { clip-path: polygon(0 60%, 100% 60%, 100% 60%, 0 60%); }
+            76% { clip-path: polygon(0 75%, 100% 75%, 100% 75%, 0 75%); }
+            81% { clip-path: polygon(0 65%, 100% 65%, 100% 40%, 0 40%); }
+            100% { clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%); }
+        }
+
+        .glow-shadow { box-shadow: 0 0 20px rgba(0,245,255,0.4), 0 0 60px rgba(0,245,255,0.15); }
+        .glow-text { text-shadow: 0 0 30px rgba(0,245,255,0.5); }
+        
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 80px rgba(0,245,255,0.3);
+        }
+        
+        .pulse-ring { animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .bounce-y { animation: bounce-y 2s infinite ease-in-out; }
+        @keyframes bounce-y {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        .rotating-border {
+            position: relative;
+            background: #0d0d1a;
+            padding: 2px;
+            border-radius: 0.5rem;
+            z-index: 1;
+        }
+        .rotating-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 0.6rem;
+            background: conic-gradient(from var(--angle), transparent 70%, var(--cyan), transparent);
+            animation: rotate 3s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotate { to { --angle: 360deg; } }
+
+        .clip-hex { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+
+        .shimmer-bg {
+            background: linear-gradient(120deg, transparent 0%, rgba(255, 107, 0, 0.1) 20%, rgba(0, 245, 255, 0.2) 40%, rgba(0, 245, 255, 0.2) 60%, rgba(255, 107, 0, 0.1) 80%, transparent 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -100% 0; } 100% { background-position: 100% 0; } }
+
+        .dashed-ring {
+            border: 2px dashed var(--cyan);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+        .mask-image-radial {
+            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 70%);
+            mask-image: radial-gradient(circle, black 40%, transparent 70%);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+        import React, { useState, useEffect, useRef, useCallback } from 'https://esm.sh/react@18.2.0';
+        import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+        import { motion, AnimatePresence, useInView } from 'https://esm.sh/framer-motion@10.16.4';
+
+        const THREE = window.THREE;
+
+        // Constants Data
+        const socialLinks = [
+            { icon: 'fa-brands fa-github', url: 'https://github.com/saurabhxcod', name: 'GitHub' },
+            { icon: 'fa-brands fa-linkedin-in', url: 'https://www.linkedin.com/in/saurabh-singh-258a23289/', name: 'LinkedIn' },
+            { icon: 'fa-solid fa-code', url: 'https://leetcode.com/u/SXjFr4MYIe/', name: 'LeetCode' },
+            { icon: 'fa-solid fa-laptop-code', url: 'https://codolio.com/profile/saurabh_singh27', name: 'Codolio' },
+            { icon: 'fa-solid fa-utensils', url: 'https://www.codechef.com/users/saurabhxcod', name: 'CodeChef' },
+            { icon: 'fa-solid fa-g', url: 'https://auth.geeksforgeeks.org/user/saurabh_singh27', name: 'GFG' },
+            { icon: 'fa-solid fa-envelope', url: 'mailto:offical.saurabhsingh@gmail.com', name: 'Email' }
+        ];
+
+        const projects = [
+            { id: 1, title: 'CampusConnect', desc: 'Role-based campus club & event management platform. AI-generated certificates, QR attendance, multi-role dashboards, GitHub-based student registration.', tags: ['React', 'Node.js', 'MongoDB', 'Express', 'AI'], live: 'https://campus-connect-3a3t.vercel.app/', github: 'https://github.com/saurabhxcod', badge: 'FEATURED', badgeColor: 'amber', type: 'MERN' },
+            { id: 2, title: 'SpeedSense AI', desc: 'AI-powered expense tracker with auto-classification via OpenRouter AI, Clerk authentication, and Chart.js visualizations.', tags: ['Next.js', 'OpenRouter AI', 'Clerk Auth', 'Chart.js'], live: 'https://speed-sense-q66j.vercel.app/', github: 'https://github.com/saurabhxcod', badge: 'AI-POWERED', badgeColor: 'cyan', type: 'AI-Powered' },
+            { id: 3, title: 'Job Junction', desc: 'Full-stack MERN job portal with recruiter-candidate interaction, role-based dashboards, and real-time updates.', tags: ['MongoDB', 'Express', 'React', 'Node.js'], live: 'https://jobhunt-lemon.vercel.app', github: 'https://github.com/saurabhxcod', badge: 'MERN STACK', badgeColor: 'cyan', type: 'MERN' },
+            { id: 4, title: 'CRM — MK Developer Group', desc: 'Client relationship management system with admin dashboard, pipeline tracking, and business analytics.', tags: ['React', 'Node.js', 'MongoDB'], live: 'https://crm.mkdevelopergroup.in/', github: 'https://github.com/saurabhxcod', badge: 'ENTERPRISE', badgeColor: 'cyan', type: 'MERN' },
+            { id: 5, title: 'LMS (Laravel)', desc: 'Learning Management System with course management, student enrollment, and progress tracking.', tags: ['Laravel', 'MySQL', 'PHP', 'Bootstrap'], live: '#', github: 'https://github.com/saurabhxcod', badge: 'LARAVEL', badgeColor: 'amber', type: 'Laravel' },
+            { id: 6, title: 'AI Virtual Assistant', desc: 'Voice-enabled AI assistant with natural language understanding and real-time responses.', tags: ['JavaScript', 'Web Speech API', 'AI'], live: '#', github: 'https://github.com/saurabhxcod', badge: 'AI', badgeColor: 'cyan', type: 'AI-Powered' },
+            { id: 7, title: 'MetalPricing', desc: 'Real-time gold & silver price tracker with admin dashboard and live data management.', tags: ['React', 'Node.js', 'Real-Time API'], live: '#', github: 'https://github.com/saurabhxcod', badge: 'REAL-TIME', badgeColor: 'cyan', type: 'React' },
+            { id: 8, title: 'Fitness Tracker', desc: 'Workout and health monitoring app with progress analytics and activity logging.', tags: ['MERN'], live: '#', github: 'https://github.com/saurabhxcod', badge: 'MERN', badgeColor: 'cyan', type: 'MERN' }
+        ];
+
+        const skillsMatrix = {
+            'Languages': ['C', 'C++', 'Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'PHP'],
+            'Frontend': ['React', 'Next.js', 'HTML5', 'CSS3', 'Tailwind', 'Bootstrap'],
+            'Backend': ['Node.js', 'Express', 'Laravel', 'MongoDB', 'MySQL', 'Redis', 'Prisma', 'GraphQL'],
+            'Cloud & Tools': ['Azure', 'Docker', 'Git', 'GitHub', 'Vercel', 'Postman', 'VS Code', 'n8n']
+        };
+
+        const skillIcons = {
+            'C': 'fa-solid fa-c', 'C++': 'fa-solid fa-c', 'Java': 'fa-brands fa-java', 'Python': 'fa-brands fa-python', 'JavaScript': 'fa-brands fa-js', 'TypeScript': 'fa-solid fa-code', 'SQL': 'fa-solid fa-database', 'PHP': 'fa-brands fa-php',
+            'React': 'fa-brands fa-react', 'Next.js': 'fa-solid fa-n', 'HTML5': 'fa-brands fa-html5', 'CSS3': 'fa-brands fa-css3-alt', 'Tailwind': 'fa-solid fa-wind', 'Bootstrap': 'fa-brands fa-bootstrap',
+            'Node.js': 'fa-brands fa-node-js', 'Express': 'fa-solid fa-server', 'Laravel': 'fa-brands fa-laravel', 'MongoDB': 'fa-solid fa-database', 'MySQL': 'fa-solid fa-database', 'Redis': 'fa-solid fa-database', 'Prisma': 'fa-solid fa-database', 'GraphQL': 'fa-solid fa-diagram-project',
+            'Azure': 'fa-brands fa-microsoft', 'Docker': 'fa-brands fa-docker', 'Git': 'fa-brands fa-git-alt', 'GitHub': 'fa-brands fa-github', 'Vercel': 'fa-solid fa-v', 'Postman': 'fa-solid fa-rocket', 'VS Code': 'fa-solid fa-code', 'n8n': 'fa-solid fa-gears'
+        };
+
+        const badgeColors = {
+            cyan: 'bg-cyan/10 border-cyan text-cyan',
+            amber: 'bg-amber/10 border-amber text-amber'
+        };
+
+        // Components
+        function Cursor() {
+            const cursorDot = useRef(null);
+            const cursorRing = useRef(null);
+
+            useEffect(() => {
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let ringX = mouseX;
+                let ringY = mouseY;
+
+                const onMouseMove = (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    if(cursorDot.current) cursorDot.current.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                };
+                document.addEventListener('mousemove', onMouseMove);
+
+                const animate = () => {
+                    ringX += (mouseX - ringX) * 0.12;
+                    ringY += (mouseY - ringY) * 0.12;
+                    if(cursorRing.current) cursorRing.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+                    requestAnimationFrame(animate);
+                };
+                animate();
+                return () => document.removeEventListener('mousemove', onMouseMove);
+            }, []);
+
+            return (
+                <>
+                    <div ref={cursorDot} className="fixed top-0 left-0 w-[10px] h-[10px] bg-cyan rounded-full pointer-events-none z-[10000] -ml-[5px] -mt-[5px]" />
+                    <div ref={cursorRing} className="fixed top-0 left-0 w-[28px] h-[28px] border-2 border-cyan rounded-full pointer-events-none z-[9999] transition-all duration-100 ease-out -ml-[14px] -mt-[14px]" />
+                </>
+            );
+        }
+
+        function Background3D() {
+            const mountRef = useRef(null);
+            
+            useEffect(() => {
+                const scene = new THREE.Scene();
+                scene.fog = new THREE.FogExp2(0x050508, 0.008);
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 20;
+
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                mountRef.current.appendChild(renderer.domElement);
+
+                const particleGeo = new THREE.BufferGeometry();
+                const particleCount = 3000;
+                const posArray = new Float32Array(particleCount * 3);
+                for(let i=0; i<particleCount*3; i+=3) {
+                    const r = 80 * Math.cbrt(Math.random());
+                    const theta = Math.random() * 2 * Math.PI;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    posArray[i] = r * Math.sin(phi) * Math.cos(theta);
+                    posArray[i+1] = r * Math.sin(phi) * Math.sin(theta);
+                    posArray[i+2] = r * Math.cos(phi);
+                }
+                particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                const particleMat = new THREE.PointsMaterial({ size: 0.08, color: 0x00f5ff, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
+                const particlesMesh = new THREE.Points(particleGeo, particleMat);
+                scene.add(particlesMesh);
+
+                const grid = new THREE.GridHelper(200, 40, 0x00f5ff, 0x00f5ff);
+                grid.position.y = -15;
+                grid.material.opacity = 0.08;
+                grid.material.transparent = true;
+                scene.add(grid);
+
+                const shapes = [];
+                const shapeGeos = [new THREE.IcosahedronGeometry(2, 0), new THREE.OctahedronGeometry(2, 0), new THREE.TorusGeometry(1.5, 0.5, 8, 12)];
+                const shapeMat = new THREE.MeshBasicMaterial({ color: 0x00f5ff, wireframe: true, transparent: true, opacity: 0.15 });
+                for(let i=0; i<6; i++) {
+                    const mesh = new THREE.Mesh(shapeGeos[i % 3], shapeMat);
+                    mesh.position.set((Math.random() - 0.5) * 40, (Math.random() - 0.5) * 30, -5 - Math.random() * 25);
+                    mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+                    mesh.userData = { rx: 0.003 + Math.random() * 0.005, ry: 0.003 + Math.random() * 0.005, baseY: mesh.position.y };
+                    shapes.push(mesh);
+                    scene.add(mesh);
+                }
+
+                const ambientLight = new THREE.AmbientLight(0x00f5ff, 0.3);
+                scene.add(ambientLight);
+                const pointLight = new THREE.PointLight(0xff6b00, 0.5, 100);
+                scene.add(pointLight);
+
+                let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+                const onDocumentMouseMove = (e) => {
+                    mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+                    mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+                };
+                document.addEventListener('mousemove', onDocumentMouseMove);
+
+                const onScroll = () => {
+                    const sy = window.scrollY;
+                    shapes.forEach(shape => shape.position.y = shape.userData.baseY + sy * 0.01);
+                };
+                window.addEventListener('scroll', onScroll);
+
+                let time = 0;
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    time += 0.01;
+                    targetX = mouseX * 0.5;
+                    targetY = mouseY * 0.5;
+
+                    particlesMesh.rotation.y += 0.0003;
+                    particlesMesh.rotation.x += 0.0001;
+                    particlesMesh.position.x += (targetX - particlesMesh.position.x) * 0.05;
+                    particlesMesh.position.y += (-targetY - particlesMesh.position.y) * 0.05;
+
+                    shapes.forEach(shape => { shape.rotation.x += shape.userData.rx; shape.rotation.y += shape.userData.ry; });
+
+                    pointLight.position.x = Math.sin(time * 0.5) * 30;
+                    pointLight.position.z = Math.cos(time * 0.5) * 30;
+                    pointLight.position.y = Math.sin(time * 0.3) * 20;
+
+                    renderer.render(scene, camera);
+                };
+                animate();
+
+                const handleResize = () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                };
+                window.addEventListener('resize', handleResize);
+
+                return () => {
+                    window.removeEventListener('resize', handleResize);
+                    document.removeEventListener('mousemove', onDocumentMouseMove);
+                    window.removeEventListener('scroll', onScroll);
+                    if(mountRef.current) mountRef.current.removeChild(renderer.domElement);
+                    renderer.dispose();
+                };
+            }, []);
+
+            return <div ref={mountRef} className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none" />;
+        }
+
+        function Preloader({ onComplete }) {
+            const [progress, setProgress] = useState(0);
+            const [logs, setLogs] = useState([]);
+            const [isFading, setIsFading] = useState(false);
+            const fullLogs = ["> Loading modules...", "> Connecting to cloud...", "> Mounting components...", "> Calibrating 3D engine...", "> Welcome, Recruiter."];
+
+            useEffect(() => {
+                let p = 0;
+                const interval = setInterval(() => { p += 2; setProgress(p); if(p >= 100) clearInterval(interval); }, 36);
+                fullLogs.forEach((log, i) => setTimeout(() => setLogs(prev => [...prev, log]), 400 + i * 200));
+                setTimeout(() => { setIsFading(true); setTimeout(onComplete, 200); }, 2400);
+                return () => clearInterval(interval);
+            }, []);
+
+            if(isFading) return <div className="fixed inset-0 bg-white z-[9999] animate-ping" />;
+
+            return (
+                <div className="fixed inset-0 bg-[#050508] z-[9999] flex flex-col items-center justify-center font-mono">
+                    <h1 className="text-cyan text-xl mb-4">INITIALIZING PORTFOLIO...</h1>
+                    <div className="w-64 h-2 border border-cyan/30 rounded overflow-hidden mb-4">
+                        <div className="h-full bg-cyan transition-all duration-75" style={{ width: `${progress}%` }} />
+                    </div>
+                    <div className="w-64 text-cyan text-xs text-left h-24">
+                        {logs.map((l, i) => <div key={i}>{l}</div>)}
+                    </div>
+                </div>
+            );
+        }
+
+        function Typewriter({ texts }) {
+            const [idx, setIdx] = useState(0);
+            const [text, setText] = useState('');
+            const [isDel, setIsDel] = useState(false);
+
+            useEffect(() => {
+                const fullText = texts[idx];
+                let speed = isDel ? 40 : 80;
+                
+                if (!isDel && text === fullText) { speed = 1200; setIsDel(true); }
+                else if (isDel && text === '') { setIsDel(false); setIdx((idx + 1) % texts.length); speed = 500; }
+
+                const timeout = setTimeout(() => setText(fullText.substring(0, text.length + (isDel ? -1 : 1))), speed);
+                return () => clearTimeout(timeout);
+            }, [text, isDel, idx, texts]);
+
+            return <span>{text}<span className="animate-pulse">▮</span></span>;
+        }
+
+        function AnimatedCounter({ value, isFloat }) {
+            const [count, setCount] = useState(0);
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+            useEffect(() => {
+                if (isInView) {
+                    let start;
+                    const animate = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = timestamp - start;
+                        const easeOut = 1 - Math.pow(1 - Math.min(progress / 2000, 1), 3);
+                        const current = easeOut * value;
+                        setCount(isFloat ? current.toFixed(2) : Math.floor(current));
+                        if (progress < 2000) requestAnimationFrame(animate);
+                        else setCount(isFloat ? value.toFixed(2) : value);
+                    };
+                    requestAnimationFrame(animate);
+                }
+            }, [isInView, value, isFloat]);
+
+            return <span ref={ref}>{count}</span>;
+        }
+
+        function AnimatedChart({ data }) {
+            const [dashOffset, setDashOffset] = useState(1000);
+            const chartRef = useRef(null);
+            const isInView = useInView(chartRef, { once: true, amount: 0.5 });
+
+            useEffect(() => {
+                if (isInView) {
+                    let start;
+                    const animate = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = timestamp - start;
+                        const easeOut = 1 - Math.pow(1 - Math.min(progress / 1500, 1), 3);
+                        setDashOffset(1000 * (1 - easeOut));
+                        if (progress < 1500) requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                }
+            }, [isInView]);
+
+            const pts = data.map((v, i) => [ 10 + i * 20, 90 - (v - 9) * 80 ]);
+            const pathD = `M ${pts[0][0]} ${pts[0][1]} L ${pts[1][0]} ${pts[1][1]} L ${pts[2][0]} ${pts[2][1]} L ${pts[3][0]} ${pts[3][1]} L ${pts[4][0]} ${pts[4][1]}`;
+
+            return (
+                <svg ref={chartRef} viewBox="0 0 100 100" className="w-full h-48 drop-shadow-[0_0_15px_rgba(0,245,255,0.4)]">
+                    {[20, 40, 60, 80].map(y => <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="rgba(0,245,255,0.1)" strokeWidth="0.5" />)}
+                    <path d={pathD} fill="none" stroke="#00f5ff" strokeWidth="2" strokeDasharray="1000" strokeDashoffset={dashOffset} />
+                    {isInView && pts.map((p, i) => (
+                        <motion.circle key={i} cx={p[0]} cy={p[1]} r="2" fill="#00f5ff" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 + i*0.1 }} className="drop-shadow-[0_0_5px_#ff6b00]" />
+                    ))}
+                    {[1,2,3,4,5].map(i => <text key={i} x={10+(i-1)*20} y="98" fill="#8892a4" fontSize="4" fontFamily="monospace" textAnchor="middle">Sem{i}</text>)}
+                </svg>
+            );
+        }
+
+        function TiltCard({ children, className }) {
+            const cardRef = useRef(null);
+            const highlightRef = useRef(null);
+
+            const handleMouseMove = (e) => {
+                if (!cardRef.current || !highlightRef.current) return;
+                const rect = cardRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -12;
+                const rotateY = ((x - centerX) / centerX) * 12;
+                
+                cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                highlightRef.current.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.1), transparent 40%)`;
+            };
+
+            const handleMouseLeave = () => {
+                if (!cardRef.current || !highlightRef.current) return;
+                cardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                cardRef.current.style.transition = `transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)`;
+                highlightRef.current.style.background = `transparent`;
+                setTimeout(() => { if(cardRef.current) cardRef.current.style.transition = ''; }, 500);
+            };
+
+            return (
+                <div ref={cardRef} className={`relative rotating-border ${className}`} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+                    <div className="absolute inset-0 z-10 pointer-events-none" ref={highlightRef} />
+                    <div className="bg-card w-full h-full relative z-0 p-6 rounded-lg overflow-hidden flex flex-col">{children}</div>
+                </div>
+            );
+        }
+
+        // Sections
+        function Navbar() {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileOpen, setMobileOpen] = useState(false);
+            const links = ['Home', 'About', 'Experience', 'Projects', 'Skills', 'Stats', 'Contact'];
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 80);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-[#050508]/85 backdrop-blur-md border-b border-border py-4' : 'bg-transparent py-6'}`}>
+                    <div className="max-w-7xl mx-auto px-6 lg:px-24 flex justify-between items-center">
+                        <a href="#home" className="relative group">
+                            <div className="absolute inset-0 bg-cyan blur-md opacity-20 group-hover:opacity-60 transition-opacity rounded-full animate-pulse"></div>
+                            <span className="font-bebas text-3xl text-cyan relative z-10">SS</span>
+                        </a>
+                        <div className="hidden md:flex gap-8">
+                            {links.map(l => (
+                                <a href={`#${l.toLowerCase()}`} key={l} className="font-rajdhani font-semibold text-white tracking-widest relative group uppercase text-sm">
+                                    {l}
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                            ))}
+                        </div>
+                        <a href="mailto:offical.saurabhsingh@gmail.com" className="hidden md:inline-block border border-cyan text-cyan font-rajdhani font-bold px-6 py-2 rounded hover:bg-cyan hover:text-bg2 transition-colors">HIRE ME</a>
+                        <button className="md:hidden text-cyan text-2xl" onClick={() => setMobileOpen(!mobileOpen)}><i className={`fa-solid ${mobileOpen ? 'fa-xmark' : 'fa-bars'}`}></i></button>
+                    </div>
+                    <AnimatePresence>
+                        {mobileOpen && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: '100vh', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="absolute top-full left-0 w-full bg-bg2 flex flex-col items-center justify-center gap-8 overflow-hidden">
+                                {links.map((l, i) => (
+                                    <motion.a href={`#${l.toLowerCase()}`} key={l} onClick={() => setMobileOpen(false)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="font-bebas text-4xl text-white hover:text-cyan">{l}</motion.a>
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </nav>
+            );
+        }
+
+        function Hero() {
+            const [stabilized, setStabilized] = useState(false);
+            useEffect(() => { const t = setTimeout(() => setStabilized(true), 1500); return () => clearTimeout(t); }, []);
+
+            return (
+                <section id="home" className="min-h-screen pt-24 pb-12 px-6 lg:px-24 flex flex-col justify-center relative">
+                    <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 z-10 w-full max-w-7xl mx-auto">
+                        <div className="flex-1 w-full flex flex-col items-start space-y-6">
+                            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                                <div className="inline-block px-3 py-1 border border-cyan text-cyan font-mono text-sm tracking-[0.2em] rounded-full mb-2 bg-cyan/5">
+                                    // FULL STACK DEVELOPER
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
+                                <h1 className={`font-bebas text-[56px] lg:text-[96px] leading-none text-white ${stabilized ? 'glow-text stabilized' : 'glitch'}`} data-text="SAURABH SINGH">
+                                    SAURABH SINGH
+                                </h1>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="font-mono text-xl lg:text-2xl text-cyan h-8">
+                                <Typewriter texts={["Full-Stack Developer", "MERN Stack Engineer", "Laravel & PHP Expert", "Azure Certified Dev", "DSA Problem Solver · 850+", "Open Source Builder"]} />
+                            </motion.div>
+                            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="font-rajdhani text-lg text-gray max-w-lg">
+                                B.Tech CSE @ Bennett University · CGPA 9.37 · Greater Noida, India
+                            </motion.p>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="flex flex-wrap gap-4 mt-4">
+                                <a href="#projects" className="bg-cyan text-bg2 font-rajdhani font-bold px-8 py-3 rounded hover-lift flex items-center gap-2 group overflow-hidden relative">
+                                    <span className="relative z-10">VIEW PROJECTS</span>
+                                    <div className="absolute inset-0 bg-white/30 -translate-x-full group-hover:animate-[shimmer_1s_forwards]" />
+                                </a>
+                                <a href="https://drive.google.com/file/d/1GQXjbMceklT8IDPIOUHTrkTc260D-j3L/view" target="_blank" rel="noreferrer" className="border border-cyan text-cyan font-rajdhani font-bold px-8 py-3 rounded hover:bg-cyan hover:text-bg2 transition-colors group flex items-center gap-2">
+                                    DOWNLOAD RESUME <i className="fa-solid fa-download group-hover:animate-spin"></i>
+                                </a>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="flex gap-4 mt-6">
+                                {socialLinks.map((s, i) => (
+                                    <a key={i} href={s.url} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-cyan flex items-center justify-center text-cyan hover:bg-cyan hover:text-bg2 transition-colors group">
+                                        <motion.i whileHover={{ scale: 1.2, y: -2 }} className={`${s.icon} text-lg`} />
+                                    </a>
+                                ))}
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex gap-6 mt-8 p-4 bg-card/50 backdrop-blur border border-border rounded-lg">
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={850}/>+</div><div className="text-gray font-rajdhani text-sm">Problems</div></div>
+                                <div className="w-px bg-border"></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={9.37} isFloat/></div><div className="text-gray font-rajdhani text-sm">CGPA</div></div>
+                                <div className="w-px bg-border"></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={3}/></div><div className="text-gray font-rajdhani text-sm">Certs</div></div>
+                                <div className="w-px bg-border"></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={10}/>+</div><div className="text-gray font-rajdhani text-sm">Projects</div></div>
+                            </motion.div>
+                        </div>
+
+                        <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }} className="flex-1 w-full flex justify-center lg:justify-end relative">
+                            <div className="relative w-[280px] h-[280px]">
+                                <div className="absolute inset-0 dashed-ring"></div>
+                                <div className="absolute inset-0 rounded-full border-[3px] border-cyan glow-shadow overflow-hidden z-10 hover:scale-105 transition-transform duration-500 cursor-none">
+                                    <img src="https://drive.google.com/uc?export=view&id=1ax_YBXirlL2djF2phLFKY5iqt_hOE8qb" alt="Saurabh Singh" className="w-full h-full object-cover" />
+                                </div>
+                                <div className="absolute inset-[-40px] opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSI0OSIgdmlld0JveD0iMCAwIDI4IDQ5Ij48ZyBmaWxsPSIjMDBmNWZmIiBmaWxsLW9wYWNpdHk9IjEiPjxwYXRoIGQ9Ik0xMy45OSAxMS4yM2wzLjItNS41M2guMTNsMy4xOSA1LjUydi4xM2wtMy4yIDUuNTNoLS4xM2wtMy4xOS01LjUydi0uMTN6Ii8+PC9nPjwvc3ZnPg==')] z-0 rounded-full mask-image-radial"></div>
+
+                                <div className="absolute top-10 -left-10 bg-card border border-cyan text-cyan font-mono text-xs px-3 py-1 rounded-full bounce-y z-20" style={{ animationDelay: '0s' }}>React</div>
+                                <div className="absolute top-4 -right-8 bg-card border border-amber text-amber font-mono text-xs px-3 py-1 rounded-full bounce-y z-20" style={{ animationDelay: '0.4s' }}>Next.js</div>
+                                <div className="absolute bottom-12 -left-12 bg-card border border-cyan text-cyan font-mono text-xs px-3 py-1 rounded-full bounce-y z-20" style={{ animationDelay: '0.8s' }}>MongoDB</div>
+                                <div className="absolute bottom-4 -right-4 bg-card border border-amber text-amber font-mono text-xs px-3 py-1 rounded-full bounce-y z-20" style={{ animationDelay: '1.2s' }}>Laravel</div>
+                                <div className="absolute -bottom-8 left-16 bg-card border border-cyan text-cyan font-mono text-xs px-3 py-1 rounded-full bounce-y z-20" style={{ animationDelay: '1.6s' }}>Azure</div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                        <span className="font-mono text-[11px] tracking-[0.4em] text-gray">SCROLL TO EXPLORE</span>
+                        <i className="fa-solid fa-chevron-down text-cyan bounce-y"></i>
+                    </motion.div>
+                </section>
+            );
+        }
+
+        function About() {
+            const termRef = useRef(null);
+            const isInView = useInView(termRef, { once: true, amount: 0.2 });
+            const [termLines, setTermLines] = useState([]);
+            const lines = [
+                { c: "$ whoami", r: "→ saurabh@bennett-university" },
+                { c: "$ cat about.json", r: "→ { role: \"Full Stack Dev\", cgpa: 9.37, location: \"Greater Noida, IN\" }" },
+                { c: "$ ls skills/", r: "→ React  Next.js  Node  Laravel  MongoDB  MySQL  Azure  Docker" },
+                { c: "$ ./run portfolio.sh", r: "→ 🚀 Portfolio initialized... Welcome!" }
+            ];
+
+            useEffect(() => {
+                if(isInView && termLines.length === 0) {
+                    lines.forEach((l, i) => {
+                        setTimeout(() => {
+                            setTermLines(prev => [...prev, l.c]);
+                            setTimeout(() => {
+                                setTermLines(prev => { const n = [...prev]; n[n.length-1] = l.c + "\n" + l.r; return n; });
+                            }, 150);
+                        }, i * 600);
+                    });
+                }
+            }, [isInView]);
+
+            return (
+                <section id="about" className="py-24 px-6 lg:px-24 bg-bg2 relative">
+                    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+                        <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-[55%]">
+                            <div className="font-mono text-cyan text-sm mb-4">// ABOUT_ME</div>
+                            <h2 className="font-bebas text-6xl text-white mb-6">ABOUT ME</h2>
+                            <p className="font-rajdhani text-[17px] leading-[1.8] text-gray mb-8">
+                                I'm Saurabh Singh, a Full-Stack Developer and B.Tech CSE student at Bennett University, Greater Noida (CGPA: 9.37). I build scalable web applications using the MERN stack, Laravel, and Next.js — from real-time job portals to AI-powered expense trackers and campus management platforms. Certified in Microsoft Azure, Meta Full-Stack Development, and Oracle AI, I bring both depth and breadth to every project. Currently seeking internships and full-time opportunities to build things that matter.
+                            </p>
+                            <div className="flex flex-wrap gap-3">
+                                {["Frontend", "Backend", "Cloud & DevOps", "DSA"].map(t => (
+                                    <a href="#skills" key={t} className="px-4 py-1.5 border border-cyan text-cyan font-rajdhani rounded hover:bg-cyan hover:text-bg2 transition-colors">{t}</a>
+                                ))}
+                            </div>
+                        </motion.div>
+                        <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-[45%]">
+                            <div ref={termRef} className="bg-card rounded-lg overflow-hidden border border-border shadow-2xl">
+                                <div className="bg-[#1a1a2e] px-4 py-2 flex items-center gap-2 border-b border-border">
+                                    <div className="w-3 h-3 rounded-full bg-red-500"></div><div className="w-3 h-3 rounded-full bg-yellow-500"></div><div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <div className="ml-2 font-mono text-xs text-gray">saurabh@portfolio:~$</div>
+                                </div>
+                                <div className="p-6 font-mono text-[13px] text-green-400 whitespace-pre-wrap min-h-[250px]">
+                                    {termLines.map((l, i) => <div key={i} className="mb-2">{l}</div>)}
+                                    {isInView && <span className="animate-pulse">▮</span>}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Experience() {
+            return (
+                <section id="experience" className="py-24 px-6 lg:px-24 bg-bg relative">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="font-mono text-cyan text-sm mb-4">// EXPERIENCE</div>
+                        <h2 className="font-bebas text-7xl text-white mb-12">COMBAT LOG</h2>
+                        <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="relative pl-8 md:pl-0">
+                            <div className="absolute left-[11px] top-0 bottom-0 w-0.5 bg-border md:hidden"></div>
+                            <div className="bg-card border-l-4 border-cyan p-6 lg:p-8 rounded-r-lg shadow-lg relative hover-lift group">
+                                <div className="absolute -left-[22px] lg:-left-2 top-8">
+                                    <div className="w-3 h-3 rounded-full bg-amber relative">
+                                        <div className="absolute inset-0 rounded-full border border-amber animate-[pulse-ring_2s_infinite]"></div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                                    <div>
+                                        <h3 className="font-bebas text-4xl text-white">Software Development Engineer Intern</h3>
+                                        <div className="font-rajdhani text-xl text-cyan font-bold mt-1">CraftiveWeb</div>
+                                    </div>
+                                    <div className="bg-amber px-3 py-1 text-bg2 font-mono text-sm font-bold rounded mt-4 md:mt-0">Dec 2025 – Feb 2026</div>
+                                </div>
+                                <ul className="space-y-3 font-rajdhani text-gray text-lg mb-6">
+                                    {["Developed full-stack web applications using Laravel and MERN stack", "Built and integrated secure REST APIs with Laravel and Node.js", "Designed responsive frontend components using React.js", "Managed and optimized MySQL and MongoDB databases", "Contributed to testing, deployment, and DevOps workflows"].map((pt, i) => (
+                                        <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * (i+1) }} className="flex items-start gap-2"><i className="fa-solid fa-angle-right text-cyan mt-1"></i> {pt}</motion.li>
+                                    ))}
+                                </ul>
+                                <div className="flex flex-wrap gap-2">
+                                    {['Laravel', 'React.js', 'Node.js', 'MongoDB', 'MySQL', 'REST API'].map(t => <span key={t} className="border border-cyan/30 text-cyan font-mono text-xs px-2 py-1 rounded bg-cyan/5">{t}</span>)}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Projects() {
+            const [filter, setFilter] = useState('All');
+            const [showAll, setShowAll] = useState(false);
+            const filtered = projects.filter(p => filter === 'All' || p.type === filter);
+            const displayed = showAll ? filtered : filtered.slice(0, 6);
+
+            return (
+                <section id="projects" className="py-24 px-6 lg:px-24 bg-bg2 relative min-h-screen">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="font-mono text-cyan text-sm mb-4">// PROJECTS</div>
+                        <h2 className="font-bebas text-7xl text-white mb-8">THE ARSENAL</h2>
+                        <div className="flex flex-wrap gap-4 mb-12">
+                            {['All', 'MERN', 'AI-Powered', 'Laravel', 'React'].map(f => (
+                                <button key={f} onClick={() => setFilter(f)} className={`font-rajdhani text-lg px-4 py-1 border-b-2 transition-colors ${filter === f ? 'border-cyan text-cyan' : 'border-transparent text-gray hover:text-white'}`}>{f}</button>
+                            ))}
+                        </div>
+                        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <AnimatePresence>
+                                {displayed.map(p => (
+                                    <motion.div layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }} key={p.id} className="h-full">
+                                        <TiltCard className="h-full">
+                                            <div className="flex justify-between items-start mb-4 relative z-20">
+                                                <h3 className="font-bebas text-3xl text-white">{p.title}</h3>
+                                                <span className={`px-2 py-1 text-[10px] font-mono rounded border ${badgeColors[p.badgeColor]}`}>{p.badge}</span>
+                                            </div>
+                                            <p className="font-rajdhani text-[15px] text-gray mb-6 flex-grow relative z-20">{p.desc}</p>
+                                            <div className="flex flex-wrap gap-2 mb-6 relative z-20">
+                                                {p.tags.map(t => <span key={t} className="text-[11px] font-mono border border-cyan/30 text-cyan/80 px-2 py-0.5 rounded">{t}</span>)}
+                                            </div>
+                                            <div className="flex gap-4 mt-auto relative z-20">
+                                                <a href={p.live} target="_blank" rel="noreferrer" className="text-sm font-rajdhani font-bold border border-cyan text-cyan px-4 py-1.5 rounded hover:bg-cyan hover:text-bg2 transition-colors">LIVE DEMO ↗</a>
+                                                <a href={p.github} target="_blank" rel="noreferrer" className="text-sm font-rajdhani font-bold border border-gray text-gray px-4 py-1.5 rounded hover:border-white hover:text-white transition-colors">GITHUB ⭐</a>
+                                            </div>
+                                        </TiltCard>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </motion.div>
+                        {!showAll && filtered.length > 6 && (
+                            <div className="mt-12 text-center">
+                                <button onClick={() => setShowAll(true)} className="font-rajdhani font-bold text-cyan border border-cyan px-8 py-3 rounded hover-lift">SHOW MORE</button>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            );
+        }
+
+        function Skills() {
+            const [tab, setTab] = useState('Frontend');
+            const topSkills = [{ name: 'React', pct: 90 }, { name: 'Node.js', pct: 88 }, { name: 'MongoDB', pct: 85 }, { name: 'Laravel', pct: 82 }, { name: 'Next.js', pct: 80 }, { name: 'SQL', pct: 78 }];
+            
+            return (
+                <section id="skills" className="py-24 px-6 lg:px-24 bg-bg relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="font-mono text-cyan text-sm mb-4">// SKILLS</div>
+                        <h2 className="font-bebas text-7xl text-white mb-12">TECH MATRIX</h2>
+                        <div className="flex flex-col lg:flex-row gap-16">
+                            <div className="w-full lg:w-1/2">
+                                <div className="flex flex-wrap gap-4 mb-8 border-b border-border">
+                                    {Object.keys(skillsMatrix).map(k => (
+                                        <button key={k} onClick={() => setTab(k)} style={tab === k ? {textShadow: '0 0 10px #00f5ff'} : {}} className={`font-rajdhani text-xl pb-2 border-b-2 transition-colors relative ${tab === k ? 'border-cyan text-cyan' : 'border-transparent text-gray hover:text-white'}`}>{k}</button>
+                                    ))}
+                                </div>
+                                <AnimatePresence mode="wait">
+                                    <motion.div key={tab} initial={{ opacity: 0, rotateY: 90 }} animate={{ opacity: 1, rotateY: 0 }} exit={{ opacity: 0, rotateY: -90 }} transition={{ staggerChildren: 0.05 }} className="flex flex-wrap gap-4">
+                                        {skillsMatrix[tab].map((s, i) => (
+                                            <motion.div initial={{ opacity: 0, rotateY: 90 }} animate={{ opacity: 1, rotateY: 0 }} key={s} className="w-[94px] h-[104px] clip-hex bg-cyan/30 flex items-center justify-center group cursor-none">
+                                                <div className="w-[90px] h-[100px] clip-hex bg-card flex flex-col items-center justify-center gap-2 group-hover:bg-cyan/10 transition-colors">
+                                                    <i className={`${skillIcons[s] || 'fa-solid fa-code'} text-2xl text-gray group-hover:text-cyan transition-colors`}></i>
+                                                    <span className="font-mono text-[10px] text-center text-gray group-hover:text-cyan">{s}</span>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                            <div className="w-full lg:w-1/2">
+                                <h3 className="font-rajdhani text-2xl text-white mb-6">CORE PROFICIENCY</h3>
+                                <div className="space-y-6">
+                                    {topSkills.map((s, i) => (
+                                        <div key={s.name}>
+                                            <div className="flex justify-between font-mono text-sm mb-2"><span className="text-white">{s.name}</span><span className="text-cyan">{s.pct}%</span></div>
+                                            <div className="w-full h-1.5 bg-bg2 rounded overflow-hidden">
+                                                <motion.div initial={{ width: 0 }} whileInView={{ width: `${s.pct}%` }} viewport={{ once: true }} transition={{ duration: 1, delay: i * 0.1 }} className="h-full bg-gradient-to-r from-cyan/20 to-cyan shadow-[0_0_10px_#00f5ff]" />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Stats() {
+            return (
+                <section id="stats" className="py-24 px-6 lg:px-24 bg-bg2 relative">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="font-mono text-cyan text-sm mb-4">// STATS</div>
+                        <h2 className="font-bebas text-7xl text-white mb-12">THE NUMBERS DON'T LIE</h2>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                            <div className="bg-card p-6 border border-border rounded-lg shadow-lg relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                                <h3 className="font-bebas text-3xl text-white mb-6 flex items-center gap-2"><i className="fa-solid fa-graduation-cap text-cyan"></i> Bennett University</h3>
+                                <AnimatedChart data={[9.5, 9.43, 9.83, 9.23, 9.37]} />
+                                <div className="flex justify-between mt-8">
+                                    <div className="text-center">
+                                        <div className="relative w-16 h-16 mx-auto mb-2">
+                                            <svg viewBox="0 0 36 36" className="w-full h-full">
+                                                <path className="text-bg2" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                                <motion.path initial={{ strokeDasharray: "0, 100" }} whileInView={{ strokeDasharray: "86, 100" }} viewport={{ once: true }} transition={{ duration: 1.5 }} className="text-cyan" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                            </svg>
+                                            <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px]">86%</div>
+                                        </div>
+                                        <div className="font-rajdhani text-sm text-gray">Class 12</div>
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="relative w-16 h-16 mx-auto mb-2">
+                                            <svg viewBox="0 0 36 36" className="w-full h-full">
+                                                <path className="text-bg2" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                                <motion.path initial={{ strokeDasharray: "0, 100" }} whileInView={{ strokeDasharray: "92.16, 100" }} viewport={{ once: true }} transition={{ duration: 1.5 }} className="text-cyan" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                            </svg>
+                                            <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px]">92%</div>
+                                        </div>
+                                        <div className="font-rajdhani text-sm text-gray">Class 10</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                {[{ v: 850, l: 'Problems Solved', p: '+' }, { v: 9.37, l: 'Current CGPA', f: true }, { v: 10, l: 'Projects Built', p: '+' }, { v: 3, l: 'Certifications' }].map((s, i) => (
+                                    <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="bg-card border border-border p-6 rounded-lg flex flex-col justify-center items-center text-center group hover:border-cyan/50 transition-colors">
+                                        <div className="font-bebas text-5xl xl:text-7xl text-cyan mb-2 group-hover:scale-110 transition-transform"><AnimatedCounter value={s.v} isFloat={s.f} />{s.p}</div>
+                                        <div className="font-rajdhani text-sm xl:text-base text-gray">{s.l}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <div className="space-y-6">
+                                <div className="grid grid-cols-2 gap-3">
+                                    {[{ n: 'LeetCode', i: 'fa-solid fa-code', url: 'https://leetcode.com/u/SXjFr4MYIe/' }, { n: 'GeeksForGeeks', i: 'fa-solid fa-g', url: 'https://auth.geeksforgeeks.org/user/saurabh_singh27' }, { n: 'CodeChef', i: 'fa-solid fa-utensils', url: 'https://www.codechef.com/users/saurabhxcod' }, { n: 'Codolio', i: 'fa-solid fa-laptop-code', url: 'https://codolio.com/profile/saurabh_singh27' }].map(p => (
+                                        <a href={p.url} target="_blank" rel="noreferrer" key={p.n} className="bg-card border border-border rounded p-3 text-center hover:border-cyan hover:-translate-y-1 transition-all group">
+                                            <i className={`${p.i} text-2xl text-gray group-hover:text-cyan mb-2`}></i>
+                                            <div className="font-rajdhani font-bold text-sm text-white">{p.n}</div>
+                                            <div className="font-mono text-[9px] text-gray mt-1 group-hover:text-cyan">View Profile →</div>
+                                        </a>
+                                    ))}
+                                </div>
+                                <div className="space-y-3">
+                                    {['Azure Fundamentals — Microsoft (2025)', 'Meta FullStack Developer — Coursera (2025)', 'AI Foundations — Oracle University'].map(c => (
+                                        <div key={c} className="bg-card border border-amber/50 rounded p-4 flex items-center gap-3 relative overflow-hidden group">
+                                            <div className="absolute inset-0 shimmer-bg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <i className="fa-solid fa-medal text-amber text-xl relative z-10"></i>
+                                            <div className="font-rajdhani text-sm font-bold text-white relative z-10">{c}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Contact() {
+            const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+            const [status, setStatus] = useState('');
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setStatus('✓ Message sent. I\'ll respond within 24h.');
+                setFormState({ name: '', email: '', message: '' });
+            };
+
+            return (
+                <section id="contact" className="py-24 px-6 lg:px-24 bg-bg relative">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="font-mono text-cyan text-sm mb-4">// CONTACT</div>
+                        <h2 className="font-bebas text-7xl text-white glow-text mb-2">LET'S BUILD SOMETHING</h2>
+                        <div className="font-rajdhani text-xl text-gray mb-16">Open to Internships · Collaborations · Full-time Roles</div>
+                        <div className="flex flex-col lg:flex-row gap-16">
+                            <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="w-full lg:w-1/2">
+                                <div className="space-y-6 mb-12">
+                                    {[{ i: 'fa-solid fa-envelope', l: 'Email', v: 'offical.saurabhsingh@gmail.com', u: 'mailto:offical.saurabhsingh@gmail.com' }, { i: 'fa-brands fa-linkedin-in', l: 'LinkedIn', v: 'linkedin.com/in/saurabh-singh-258a23289', u: 'https://www.linkedin.com/in/saurabh-singh-258a23289/' }, { i: 'fa-brands fa-github', l: 'GitHub', v: 'github.com/saurabhxcod', u: 'https://github.com/saurabhxcod' }, { i: 'fa-solid fa-phone', l: 'Phone', v: '+91-7905145529', u: 'tel:+917905145529' }, { i: 'fa-solid fa-location-dot', l: 'Location', v: 'Greater Noida, Uttar Pradesh, India', u: '#' }, { i: 'fa-solid fa-file-pdf', l: 'Resume', v: 'Download PDF', u: 'https://drive.google.com/file/d/1GQXjbMceklT8IDPIOUHTrkTc260D-j3L/view' }].map(item => (
+                                        <a href={item.u} target={item.u === '#' ? '_self' : '_blank'} rel="noreferrer" key={item.l} className="flex items-center gap-4 group hover:glow-shadow p-2 -ml-2 rounded transition-all">
+                                            <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-gray group-hover:text-cyan group-hover:border-cyan transition-colors"><i className={item.i}></i></div>
+                                            <div><div className="font-rajdhani text-sm text-gray">{item.l}</div><div className="font-mono text-sm text-white group-hover:text-cyan transition-colors">{item.v}</div></div>
+                                        </a>
+                                    ))}
+                                </div>
+                                <div className="flex flex-wrap gap-4">
+                                    {socialLinks.map((s, i) => (
+                                        <a key={i} href={s.url} target="_blank" rel="noreferrer" className="w-14 h-14 rounded-full border border-cyan flex items-center justify-center text-cyan hover:bg-cyan hover:text-bg2 hover:scale-110 transition-all group"><i className={`${s.icon} text-2xl group-hover:animate-bounce`}></i></a>
+                                    ))}
+                                </div>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="w-full lg:w-1/2">
+                                <div className="bg-card rounded-lg border border-border shadow-2xl overflow-hidden">
+                                    <div className="bg-[#1a1a2e] px-4 py-2 border-b border-border font-mono text-xs text-gray">saurabh@portfolio:~/contact$</div>
+                                    <form onSubmit={handleSubmit} className="p-6 font-mono text-sm text-cyan flex flex-col gap-6">
+                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> name:'}</span><span className="mr-2">[</span><input type="text" required value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
+                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> email:'}</span><span className="mr-2">[</span><input type="email" required value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
+                                        <div><label className="flex items-start"><span className="w-24 text-gray pt-1">{'> message:'}</span><span className="mr-2 pt-1">[</span><textarea required rows="4" value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow resize-none" /><span className="ml-2 self-end">]</span></label></div>
+                                        {status && <div className="text-green-400 mt-2">{status}</div>}
+                                        <button type="submit" className="mt-4 w-full bg-cyan text-bg2 font-bold py-3 rounded relative overflow-hidden group">
+                                            <span className="relative z-10">SEND MESSAGE ▶</span>
+                                            <div className="absolute inset-0 bg-white/40 -translate-x-full group-hover:animate-[shimmer_1s_forwards]" />
+                                        </button>
+                                    </form>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function Footer() {
+            const [showTop, setShowTop] = useState(false);
+            useEffect(() => {
+                const handleScroll = () => setShowTop(window.scrollY > 300);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <footer className="bg-card py-12 relative border-t border-border">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan to-transparent shadow-[0_0_10px_#00f5ff]"></div>
+                    <div className="text-center">
+                        <h2 className="font-bebas text-4xl text-cyan mb-2 glow-text">SAURABH SINGH</h2>
+                        <p className="font-rajdhani text-gray">Built with React · Deployed on Vercel · © 2025</p>
+                    </div>
+                    <AnimatePresence>
+                        {showTop && (
+                            <motion.button initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-8 right-8 w-12 h-12 bg-cyan text-bg2 rounded-full flex items-center justify-center hover:scale-110 hover:shadow-[0_0_15px_#00f5ff] transition-all z-[90]">
+                                <i className="fa-solid fa-arrow-up"></i>
+                            </motion.button>
+                        )}
+                    </AnimatePresence>
+                </footer>
+            );
+        }
+
+        function App() {
+            const [isLoading, setIsLoading] = useState(true);
+            return (
+                <>
+                    <Cursor />
+                    {isLoading ? <Preloader onComplete={() => setIsLoading(false)} /> : (
+                        <>
+                            <Background3D />
+                            <Navbar />
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+                                <Hero />
+                                <About />
+                                <Experience />
+                                <Projects />
+                                <Skills />
+                                <Stats />
+                                <Contact />
+                                <Footer />
+                            </motion.div>
+                        </>
+                    )}
+                </>
+            );
+        }
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
