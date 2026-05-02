@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saurabh Singh | Cyber Engineer</title>
-    
+    <title>Saurabh Singh | Software Engineer</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -30,18 +31,18 @@
             }
         }
     </script>
-    
+
     <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap');
     </style>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+
     <!-- Babel for in-browser transpilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
@@ -55,9 +56,9 @@
             --amber: #ff6b00;
             --white: #f0f4ff;
             --gray: #8892a4;
-            --border: rgba(0,245,255,0.12);
+            --border: rgba(0, 245, 255, 0.12);
         }
-        
+
         body {
             background-color: var(--bg);
             color: var(--white);
@@ -65,8 +66,12 @@
             overflow-x: hidden;
             cursor: none;
         }
-        
-        a, button, [role="button"], input, textarea {
+
+        a,
+        button,
+        [role="button"],
+        input,
+        textarea {
             cursor: none;
         }
 
@@ -74,7 +79,10 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 9998;
             opacity: 0.04;
@@ -85,24 +93,27 @@
         body::after {
             content: '';
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 9999;
             opacity: 0.02;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0px,
-                transparent 1px,
-                #000 1px,
-                #000 2px
-            );
+            background: repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 1px,
+                    #000 1px,
+                    #000 2px);
         }
 
         /* Glitch Effect */
         .glitch {
             position: relative;
         }
-        .glitch::before, .glitch::after {
+
+        .glitch::before,
+        .glitch::after {
             content: attr(data-text);
             position: absolute;
             top: 0;
@@ -111,64 +122,149 @@
             height: 100%;
             background: var(--bg);
         }
+
         .glitch::before {
             left: 4px;
             text-shadow: -2px 0 var(--amber);
             clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
             animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
         }
+
         .glitch::after {
             left: -4px;
             text-shadow: -2px 0 var(--cyan);
             clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
             animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
         }
-        .glitch.stabilized::before, .glitch.stabilized::after {
+
+        .glitch.stabilized::before,
+        .glitch.stabilized::after {
             display: none;
         }
-        
+
         @keyframes glitch-anim-1 {
-            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); }
-            20% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); }
-            40% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); }
-            50% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); }
-            60% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); }
-            70% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); }
-            80% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); }
-            100% { clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%); }
-        }
-        @keyframes glitch-anim-2 {
-            0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); }
-            15% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); }
-            22% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); }
-            31% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); }
-            45% { clip-path: polygon(0 40%, 100% 40%, 100% 40%, 0 40%); }
-            51% { clip-path: polygon(0 52%, 100% 52%, 100% 59%, 0 59%); }
-            63% { clip-path: polygon(0 60%, 100% 60%, 100% 60%, 0 60%); }
-            76% { clip-path: polygon(0 75%, 100% 75%, 100% 75%, 0 75%); }
-            81% { clip-path: polygon(0 65%, 100% 65%, 100% 40%, 0 40%); }
-            100% { clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%); }
+            0% {
+                clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+            }
+
+            20% {
+                clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+            }
+
+            40% {
+                clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+            }
+
+            50% {
+                clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+            }
+
+            60% {
+                clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+            }
+
+            70% {
+                clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+            }
+
+            80% {
+                clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+            }
+
+            100% {
+                clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+            }
         }
 
-        .glow-shadow { box-shadow: 0 0 20px rgba(0,245,255,0.4), 0 0 60px rgba(0,245,255,0.15); }
-        .glow-text { text-shadow: 0 0 30px rgba(0,245,255,0.5); }
-        
-        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        @keyframes glitch-anim-2 {
+            0% {
+                clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%);
+            }
+
+            15% {
+                clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%);
+            }
+
+            22% {
+                clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%);
+            }
+
+            31% {
+                clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%);
+            }
+
+            45% {
+                clip-path: polygon(0 40%, 100% 40%, 100% 40%, 0 40%);
+            }
+
+            51% {
+                clip-path: polygon(0 52%, 100% 52%, 100% 59%, 0 59%);
+            }
+
+            63% {
+                clip-path: polygon(0 60%, 100% 60%, 100% 60%, 0 60%);
+            }
+
+            76% {
+                clip-path: polygon(0 75%, 100% 75%, 100% 75%, 0 75%);
+            }
+
+            81% {
+                clip-path: polygon(0 65%, 100% 65%, 100% 40%, 0 40%);
+            }
+
+            100% {
+                clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%);
+            }
+        }
+
+        .glow-shadow {
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.4), 0 0 60px rgba(0, 245, 255, 0.15);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
         .hover-lift:hover {
             transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 80px rgba(0,245,255,0.3);
-        }
-        
-        .pulse-ring { animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.6), 0 0 80px rgba(0, 245, 255, 0.3);
         }
 
-        .bounce-y { animation: bounce-y 2s infinite ease-in-out; }
+        .pulse-ring {
+            animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        .bounce-y {
+            animation: bounce-y 2s infinite ease-in-out;
+        }
+
         @keyframes bounce-y {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
         }
 
         @property --angle {
@@ -176,6 +272,7 @@
             initial-value: 0deg;
             inherits: false;
         }
+
         .rotating-border {
             position: relative;
             background: #0d0d1a;
@@ -183,6 +280,7 @@
             border-radius: 0.5rem;
             z-index: 1;
         }
+
         .rotating-border::before {
             content: '';
             position: absolute;
@@ -192,28 +290,61 @@
             animation: rotate 3s linear infinite;
             z-index: -1;
         }
-        @keyframes rotate { to { --angle: 360deg; } }
 
-        .clip-hex { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        @keyframes rotate {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        .clip-hex {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
 
         .shimmer-bg {
             background: linear-gradient(120deg, transparent 0%, rgba(255, 107, 0, 0.1) 20%, rgba(0, 245, 255, 0.2) 40%, rgba(0, 245, 255, 0.2) 60%, rgba(255, 107, 0, 0.1) 80%, transparent 100%);
             background-size: 200% auto;
             animation: shimmer 3s linear infinite;
         }
-        @keyframes shimmer { 0% { background-position: -100% 0; } 100% { background-position: 100% 0; } }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -100% 0;
+            }
+
+            100% {
+                background-position: 100% 0;
+            }
+        }
 
         .dashed-ring {
             border: 2px dashed var(--cyan);
             border-radius: 50%;
             animation: spin 20s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 245, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan);
+        }
 
         .mask-image-radial {
             -webkit-mask-image: radial-gradient(circle, black 40%, transparent 70%);
@@ -221,6 +352,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
@@ -286,14 +418,14 @@
                 const onMouseMove = (e) => {
                     mouseX = e.clientX;
                     mouseY = e.clientY;
-                    if(cursorDot.current) cursorDot.current.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                    if (cursorDot.current) cursorDot.current.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
                 };
                 document.addEventListener('mousemove', onMouseMove);
 
                 const animate = () => {
                     ringX += (mouseX - ringX) * 0.12;
                     ringY += (mouseY - ringY) * 0.12;
-                    if(cursorRing.current) cursorRing.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+                    if (cursorRing.current) cursorRing.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
                     requestAnimationFrame(animate);
                 };
                 animate();
@@ -310,7 +442,7 @@
 
         function Background3D() {
             const mountRef = useRef(null);
-            
+
             useEffect(() => {
                 const scene = new THREE.Scene();
                 scene.fog = new THREE.FogExp2(0x050508, 0.008);
@@ -325,13 +457,13 @@
                 const particleGeo = new THREE.BufferGeometry();
                 const particleCount = 3000;
                 const posArray = new Float32Array(particleCount * 3);
-                for(let i=0; i<particleCount*3; i+=3) {
+                for (let i = 0; i < particleCount * 3; i += 3) {
                     const r = 80 * Math.cbrt(Math.random());
                     const theta = Math.random() * 2 * Math.PI;
                     const phi = Math.acos(2 * Math.random() - 1);
                     posArray[i] = r * Math.sin(phi) * Math.cos(theta);
-                    posArray[i+1] = r * Math.sin(phi) * Math.sin(theta);
-                    posArray[i+2] = r * Math.cos(phi);
+                    posArray[i + 1] = r * Math.sin(phi) * Math.sin(theta);
+                    posArray[i + 2] = r * Math.cos(phi);
                 }
                 particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
                 const particleMat = new THREE.PointsMaterial({ size: 0.08, color: 0x00f5ff, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
@@ -347,7 +479,7 @@
                 const shapes = [];
                 const shapeGeos = [new THREE.IcosahedronGeometry(2, 0), new THREE.OctahedronGeometry(2, 0), new THREE.TorusGeometry(1.5, 0.5, 8, 12)];
                 const shapeMat = new THREE.MeshBasicMaterial({ color: 0x00f5ff, wireframe: true, transparent: true, opacity: 0.15 });
-                for(let i=0; i<6; i++) {
+                for (let i = 0; i < 6; i++) {
                     const mesh = new THREE.Mesh(shapeGeos[i % 3], shapeMat);
                     mesh.position.set((Math.random() - 0.5) * 40, (Math.random() - 0.5) * 30, -5 - Math.random() * 25);
                     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
@@ -407,7 +539,7 @@
                     window.removeEventListener('resize', handleResize);
                     document.removeEventListener('mousemove', onDocumentMouseMove);
                     window.removeEventListener('scroll', onScroll);
-                    if(mountRef.current) mountRef.current.removeChild(renderer.domElement);
+                    if (mountRef.current) mountRef.current.removeChild(renderer.domElement);
                     renderer.dispose();
                 };
             }, []);
@@ -423,13 +555,13 @@
 
             useEffect(() => {
                 let p = 0;
-                const interval = setInterval(() => { p += 2; setProgress(p); if(p >= 100) clearInterval(interval); }, 36);
+                const interval = setInterval(() => { p += 2; setProgress(p); if (p >= 100) clearInterval(interval); }, 36);
                 fullLogs.forEach((log, i) => setTimeout(() => setLogs(prev => [...prev, log]), 400 + i * 200));
                 setTimeout(() => { setIsFading(true); setTimeout(onComplete, 200); }, 2400);
                 return () => clearInterval(interval);
             }, []);
 
-            if(isFading) return <div className="fixed inset-0 bg-white z-[9999] animate-ping" />;
+            if (isFading) return <div className="fixed inset-0 bg-white z-[9999] animate-ping" />;
 
             return (
                 <div className="fixed inset-0 bg-[#050508] z-[9999] flex flex-col items-center justify-center font-mono">
@@ -452,7 +584,7 @@
             useEffect(() => {
                 const fullText = texts[idx];
                 let speed = isDel ? 40 : 80;
-                
+
                 if (!isDel && text === fullText) { speed = 1200; setIsDel(true); }
                 else if (isDel && text === '') { setIsDel(false); setIdx((idx + 1) % texts.length); speed = 500; }
 
@@ -506,7 +638,7 @@
                 }
             }, [isInView]);
 
-            const pts = data.map((v, i) => [ 10 + i * 20, 90 - (v - 9) * 80 ]);
+            const pts = data.map((v, i) => [10 + i * 20, 90 - (v - 9) * 80]);
             const pathD = `M ${pts[0][0]} ${pts[0][1]} L ${pts[1][0]} ${pts[1][1]} L ${pts[2][0]} ${pts[2][1]} L ${pts[3][0]} ${pts[3][1]} L ${pts[4][0]} ${pts[4][1]}`;
 
             return (
@@ -514,9 +646,9 @@
                     {[20, 40, 60, 80].map(y => <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="rgba(0,245,255,0.1)" strokeWidth="0.5" />)}
                     <path d={pathD} fill="none" stroke="#00f5ff" strokeWidth="2" strokeDasharray="1000" strokeDashoffset={dashOffset} />
                     {isInView && pts.map((p, i) => (
-                        <motion.circle key={i} cx={p[0]} cy={p[1]} r="2" fill="#00f5ff" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 + i*0.1 }} className="drop-shadow-[0_0_5px_#ff6b00]" />
+                        <motion.circle key={i} cx={p[0]} cy={p[1]} r="2" fill="#00f5ff" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 + i * 0.1 }} className="drop-shadow-[0_0_5px_#ff6b00]" />
                     ))}
-                    {[1,2,3,4,5].map(i => <text key={i} x={10+(i-1)*20} y="98" fill="#8892a4" fontSize="4" fontFamily="monospace" textAnchor="middle">Sem{i}</text>)}
+                    {[1, 2, 3, 4, 5].map(i => <text key={i} x={10 + (i - 1) * 20} y="98" fill="#8892a4" fontSize="4" fontFamily="monospace" textAnchor="middle">Sem{i}</text>)}
                 </svg>
             );
         }
@@ -532,10 +664,10 @@
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = ((y - centerY) / centerY) * -12;
                 const rotateY = ((x - centerX) / centerX) * 12;
-                
+
                 cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 highlightRef.current.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.1), transparent 40%)`;
             };
@@ -545,7 +677,7 @@
                 cardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
                 cardRef.current.style.transition = `transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)`;
                 highlightRef.current.style.background = `transparent`;
-                setTimeout(() => { if(cardRef.current) cardRef.current.style.transition = ''; }, 500);
+                setTimeout(() => { if (cardRef.current) cardRef.current.style.transition = ''; }, 500);
             };
 
             return (
@@ -640,13 +772,13 @@
                                 ))}
                             </motion.div>
                             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex gap-6 mt-8 p-4 bg-card/50 backdrop-blur border border-border rounded-lg">
-                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={850}/>+</div><div className="text-gray font-rajdhani text-sm">Problems</div></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={850} />+</div><div className="text-gray font-rajdhani text-sm">Problems</div></div>
                                 <div className="w-px bg-border"></div>
-                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={9.37} isFloat/></div><div className="text-gray font-rajdhani text-sm">CGPA</div></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={9.37} isFloat /></div><div className="text-gray font-rajdhani text-sm">CGPA</div></div>
                                 <div className="w-px bg-border"></div>
-                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={3}/></div><div className="text-gray font-rajdhani text-sm">Certs</div></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={3} /></div><div className="text-gray font-rajdhani text-sm">Certs</div></div>
                                 <div className="w-px bg-border"></div>
-                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={10}/>+</div><div className="text-gray font-rajdhani text-sm">Projects</div></div>
+                                <div className="text-center"><div className="text-cyan font-bebas text-3xl"><AnimatedCounter value={10} />+</div><div className="text-gray font-rajdhani text-sm">Projects</div></div>
                             </motion.div>
                         </div>
 
@@ -687,12 +819,12 @@
             ];
 
             useEffect(() => {
-                if(isInView && termLines.length === 0) {
+                if (isInView && termLines.length === 0) {
                     lines.forEach((l, i) => {
                         setTimeout(() => {
                             setTermLines(prev => [...prev, l.c]);
                             setTimeout(() => {
-                                setTermLines(prev => { const n = [...prev]; n[n.length-1] = l.c + "\n" + l.r; return n; });
+                                setTermLines(prev => { const n = [...prev]; n[n.length - 1] = l.c + "\n" + l.r; return n; });
                             }, 150);
                         }, i * 600);
                     });
@@ -754,7 +886,7 @@
                                 </div>
                                 <ul className="space-y-3 font-rajdhani text-gray text-lg mb-6">
                                     {["Developed full-stack web applications using Laravel and MERN stack", "Built and integrated secure REST APIs with Laravel and Node.js", "Designed responsive frontend components using React.js", "Managed and optimized MySQL and MongoDB databases", "Contributed to testing, deployment, and DevOps workflows"].map((pt, i) => (
-                                        <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * (i+1) }} className="flex items-start gap-2"><i className="fa-solid fa-angle-right text-cyan mt-1"></i> {pt}</motion.li>
+                                        <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * (i + 1) }} className="flex items-start gap-2"><i className="fa-solid fa-angle-right text-cyan mt-1"></i> {pt}</motion.li>
                                     ))}
                                 </ul>
                                 <div className="flex flex-wrap gap-2">
@@ -818,7 +950,7 @@
         function Skills() {
             const [tab, setTab] = useState('Frontend');
             const topSkills = [{ name: 'React', pct: 90 }, { name: 'Node.js', pct: 88 }, { name: 'MongoDB', pct: 85 }, { name: 'Laravel', pct: 82 }, { name: 'Next.js', pct: 80 }, { name: 'SQL', pct: 78 }];
-            
+
             return (
                 <section id="skills" className="py-24 px-6 lg:px-24 bg-bg relative overflow-hidden">
                     <div className="max-w-7xl mx-auto">
@@ -828,7 +960,7 @@
                             <div className="w-full lg:w-1/2">
                                 <div className="flex flex-wrap gap-4 mb-8 border-b border-border">
                                     {Object.keys(skillsMatrix).map(k => (
-                                        <button key={k} onClick={() => setTab(k)} style={tab === k ? {textShadow: '0 0 10px #00f5ff'} : {}} className={`font-rajdhani text-xl pb-2 border-b-2 transition-colors relative ${tab === k ? 'border-cyan text-cyan' : 'border-transparent text-gray hover:text-white'}`}>{k}</button>
+                                        <button key={k} onClick={() => setTab(k)} style={tab === k ? { textShadow: '0 0 10px #00f5ff' } : {}} className={`font-rajdhani text-xl pb-2 border-b-2 transition-colors relative ${tab === k ? 'border-cyan text-cyan' : 'border-transparent text-gray hover:text-white'}`}>{k}</button>
                                     ))}
                                 </div>
                                 <AnimatePresence mode="wait">
@@ -966,9 +1098,9 @@
                                 <div className="bg-card rounded-lg border border-border shadow-2xl overflow-hidden">
                                     <div className="bg-[#1a1a2e] px-4 py-2 border-b border-border font-mono text-xs text-gray">saurabh@portfolio:~/contact$</div>
                                     <form onSubmit={handleSubmit} className="p-6 font-mono text-sm text-cyan flex flex-col gap-6">
-                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> name:'}</span><span className="mr-2">[</span><input type="text" required value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
-                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> email:'}</span><span className="mr-2">[</span><input type="email" required value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
-                                        <div><label className="flex items-start"><span className="w-24 text-gray pt-1">{'> message:'}</span><span className="mr-2 pt-1">[</span><textarea required rows="4" value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow resize-none" /><span className="ml-2 self-end">]</span></label></div>
+                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> name:'}</span><span className="mr-2">[</span><input type="text" required value={formState.name} onChange={e => setFormState({ ...formState, name: e.target.value })} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
+                                        <div><label className="flex items-center"><span className="w-24 text-gray">{'> email:'}</span><span className="mr-2">[</span><input type="email" required value={formState.email} onChange={e => setFormState({ ...formState, email: e.target.value })} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow" /><span className="ml-2">]</span></label></div>
+                                        <div><label className="flex items-start"><span className="w-24 text-gray pt-1">{'> message:'}</span><span className="mr-2 pt-1">[</span><textarea required rows="4" value={formState.message} onChange={e => setFormState({ ...formState, message: e.target.value })} className="bg-transparent border-b border-transparent focus:border-cyan outline-none text-white w-full flex-grow resize-none" /><span className="ml-2 self-end">]</span></label></div>
                                         {status && <div className="text-green-400 mt-2">{status}</div>}
                                         <button type="submit" className="mt-4 w-full bg-cyan text-bg2 font-bold py-3 rounded relative overflow-hidden group">
                                             <span className="relative z-10">SEND MESSAGE ▶</span>
@@ -1038,4 +1170,5 @@
         root.render(<App />);
     </script>
 </body>
+
 </html>
