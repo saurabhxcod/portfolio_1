@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { socialLinks } from '../../data';
 
 export default function Contact() {
@@ -12,8 +12,31 @@ export default function Contact() {
     setFormState({ name: '', email: '', message: '' });
   };
 
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => {
+        setStatus('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   return (
     <section id="contact" className="py-24 px-6 lg:px-24 bg-bg relative">
+      <AnimatePresence>
+        {status && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, x: '-50%' }}
+            animate={{ opacity: 1, y: 20, x: '-50%' }}
+            exit={{ opacity: 0, y: -50, x: '-50%' }}
+            className="fixed top-0 left-1/2 z-[10001] bg-card border border-cyan px-6 py-3 rounded-lg shadow-[0_0_20px_rgba(0,245,255,0.3)] flex items-center gap-3"
+          >
+            <div className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+            <span className="font-mono text-cyan text-sm">{status}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto">
         <div className="font-mono text-cyan text-sm mb-4">// CONTACT</div>
         <h2 className="font-bebas text-7xl text-white glow-text mb-2">LET'S BUILD SOMETHING</h2>
@@ -96,7 +119,7 @@ export default function Contact() {
                     <span className="ml-2 self-end">]</span>
                   </label>
                 </div>
-                {status && <div className="text-green-400 mt-2">{status}</div>}
+                
                 <button type="submit" className="mt-4 w-full bg-cyan text-bg2 font-bold py-3 rounded relative overflow-hidden group cursor-none">
                   <span className="relative z-10">SEND MESSAGE ▶</span>
                   <div className="absolute inset-0 bg-white/40 -translate-x-full group-hover:animate-[shimmer_1s_forwards]" />
