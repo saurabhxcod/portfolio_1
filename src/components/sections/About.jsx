@@ -9,7 +9,7 @@ export default function About() {
   const lines = [
     { c: "$ whoami", r: "→ saurabh@bennett-university" },
     { c: "$ cat about.json", r: "→ { role: \"Full Stack Dev\", cgpa: 9.37, location: \"Greater Noida, IN\" }" },
-    { c: "$ ls skills/", r: "→ React  Next.js  Node  Laravel  MongoDB  MySQL  Azure  Docker" },
+    { c: "$ ls skills/", r: "→ React  Next.js  Node  Laravel  LLMs  Azure  Docker" },
     { c: "$ ./run portfolio.sh", r: "→ 🚀 Portfolio initialized... Welcome!" }
   ];
 
@@ -45,7 +45,7 @@ export default function About() {
             I'm Saurabh Singh, a Full-Stack Developer and B.Tech CSE student at Bennett University, Greater Noida (CGPA: 9.37). I build scalable web applications using the MERN stack, Laravel, and Next.js — from real-time job portals to AI-powered expense trackers and campus management platforms. Certified in Microsoft Azure, Meta Full-Stack Development, and Oracle AI, I bring both depth and breadth to every project. Currently seeking internships and full-time opportunities to build things that matter.
           </p>
           <div className="flex flex-wrap gap-3">
-            {["Frontend", "Backend", "Cloud & DevOps", "DSA"].map(t => (
+            {["Frontend", "Backend", "Cloud & DevOps", "AI & LLMs", "DSA"].map(t => (
               <a href="#skills" key={t} className="px-4 py-1.5 border border-cyan text-cyan font-rajdhani rounded hover:bg-cyan hover:text-bg2 transition-colors cursor-none">{t}</a>
             ))}
           </div>
